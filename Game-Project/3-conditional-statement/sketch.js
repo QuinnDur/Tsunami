@@ -1,7 +1,6 @@
-//create an empty array called balls
-let arrows = [];
 
-//create a variable to hold your avatar
+let boat= [];
+
 let me;
 
 let mySound
@@ -9,6 +8,10 @@ let mySound
 function preload() {
   soundFormats('mp3', 'ogg', 'wav');
   mySound = loadSound('boom.wav')
+}
+
+function preload(){
+  boat= laodAnimation('boat/Boat0001.png','boat/Boat0004.png')
 }
 
 function setup() {
@@ -26,16 +29,16 @@ function draw(){
   me.moveMe();
 
   if (frameCount % 10 == 0) {
-      let  b = new Arrow(width, random(0,height), -3);
-      arrows.push(b);
-      console.log(arrows); //print the balls array to the console
+      let  b = new boat(width, random(0,height), -3);
+      boats.push(b);
+      console.log(boats); //print the balls array to the console
     }
 
 //	draw all the balls in that array
-	for (let i = 0; i < arrows.length; i++) {
-	 	      arrows[i].drawArrow();
-       	  arrows[i].moveArrow();
-        	arrows[i].bounceArrow();
+	for (let i = 0; i < boats.length; i++) {
+	 	      boats[i].drawBoat();
+       	  boats[i].moveBoat();
+        	boats[i].bounceBoat();
 	  }
 
 }
@@ -86,7 +89,7 @@ class Avatar {
 
 
 //ball class from which to create new balls with similar properties.
-class Arrow {
+class Boat{
 
 	//every ball needs an x value, a y value, and a speed
 	constructor(x,y, speed){
@@ -96,25 +99,20 @@ class Arrow {
 	}
 
 	// draw a ball on the screen at x,y
-	drawArrow(){
+	drawBoat(){
     	stroke(0);
       strokeWeight(1);
-    	fill("red");
-		  line(this.x,this.y,this.x-20,this.y+5);
-      line(this.x-20, this.y+5,this.x-11, this.y+8)
-      line(this.x-20, this.y+5, this.x-11, this.y-2)
-      line(this.x,this.y,this.x+5,this.y-3)
-      line(this.x,this.y,this.x+5, this.y+1)
+
 	}
 
 	//update the location of the ball, so it moves across the screen
-	moveArrow(){
+	moveBoat(){
 		this.x = this.x+ this.speed;
 		this.y = this.y+.5;
 	}
 
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
-  	bounceArrow(){
+  	bounceBoat(){
     		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-40 && this.y < me.y+40){
             this.speed = -this.speed;
             fill("red")
