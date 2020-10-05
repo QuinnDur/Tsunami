@@ -1,5 +1,5 @@
 
-let boat= [];
+let boat
 
 let me;
 
@@ -7,11 +7,11 @@ let mySound
 
 function preload() {
   soundFormats('mp3', 'ogg', 'wav');
-  mySound = loadSound('boom.wav')
+  mySound = loadSound('impact.wav')
 }
 
 function preload(){
-  boat= laodAnimation('boat/Boat0001.png','boat/Boat0004.png')
+  boat= loadAnimation('boat/Boat0001.png','boat/Boat0004.png')
 }
 
 function setup() {
@@ -28,8 +28,8 @@ function draw(){
   me.drawMe();
   me.moveMe();
 
-  if (frameCount % 10 == 0) {
-      let  b = new boat(width, random(0,height), -3);
+  if (frameCount % 50 == 0) {
+      let  b = new Boat(width, 200, -2);
       boats.push(b);
       console.log(boats); //print the balls array to the console
     }
@@ -66,13 +66,12 @@ class Avatar {
 	}
 
 	moveMe(){
-    if (keyIsDown(UP_ARROW)) {
+    if (keyIsDown(32)) {
        this.y -= this.speed;
+       //y velocity, y position, y acceleration
+       //When spacebar is pressed, character moves upward at speed of 50 frames per second, increasing by 10 each time. Once they hit a height of 150, they drop by 55 units per second until they hit the ground
     }
 
-    if (keyIsDown(DOWN_ARROW)) {
-        this.y += this.speed;
-    }
     if (keyIsDown(LEFT_ARROW)) {
         this.x -= this.speed;
     }
@@ -95,14 +94,14 @@ class Boat{
 	constructor(x,y, speed){
 		this.x = x;
     this.y = y;
-    this.speed = speed;
+    this.speed = speed/2;
 	}
 
 	// draw a ball on the screen at x,y
 	drawBoat(){
     	stroke(0);
       strokeWeight(1);
-
+animation(boat, this.x, this.y )
 	}
 
 	//update the location of the ball, so it moves across the screen
