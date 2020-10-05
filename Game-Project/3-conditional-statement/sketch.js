@@ -6,9 +6,12 @@ let me;
 
 let mySound
 
+var fisherman;
+
 function preload() {
   soundFormats('mp3', 'ogg', 'wav');
   mySound = loadSound('boom.wav')
+  fisherman = loadAnimation('fishermanSprite/FishermanWalk1.png', 'fishermanSprite/FishermanWalk4.png');
 }
 
 function setup() {
@@ -50,7 +53,7 @@ class Avatar {
 	}
 
 	drawMe(){  // draw the running person
-    		stroke("green");
+    		/*stroke("green");
         strokeWeight(3);
     		fill("blue");
 		    ellipse(this.x,this.y,20,20);
@@ -59,7 +62,8 @@ class Avatar {
         line(this.x, this.y+40, this.x+10, this.y+50);
         line(this.x+10, this.y+50, this.x+5, this.y+60);
         line(this.x, this.y+15, this.x-10, this.y+25);
-        line(this.x-10, this.y+25, this.x+10, this.y+35);
+        line(this.x-10, this.y+25, this.x+10, this.y+35);*/
+        animation(fisherman, this.x, this.y);
 
 	}
 
@@ -68,9 +72,9 @@ class Avatar {
        this.y -= this.speed;
     }
 
-    if (keyIsDown(DOWN_ARROW)) {
+    /*if (keyIsDown(DOWN_ARROW)) {
         this.y += this.speed;
-    }
+    }*/
     if (keyIsDown(LEFT_ARROW)) {
         this.x -= this.speed;
     }
