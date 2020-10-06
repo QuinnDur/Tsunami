@@ -8,9 +8,6 @@ let mySound
 function preload() {
   soundFormats('mp3', 'ogg', 'wav');
   mySound = loadSound('impact.wav')
-}
-
-function preload(){
   boat= loadAnimation('boat/Boat0001.png','boat/Boat0004.png')
 }
 
@@ -23,7 +20,7 @@ function setup() {
 }
 
 function draw(){
-	background(220);
+	background(BackgroundImage.jpg);
 
   me.drawMe();
   me.moveMe();
