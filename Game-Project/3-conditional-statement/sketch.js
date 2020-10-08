@@ -18,14 +18,21 @@ function preload() {
 function setup() {
   createCanvas(500, 400);
 
-  animation(wave, 300, 100);
+
   //make one avatar called me
   me = new Avatar(width/2, 300, 3);
 
+  wave1 = new Wave(300, 250, -2);
 }
 
 function draw(){
 	background(220);
+
+  noStroke();
+  fill(3,96,167);
+  rect(0,311,500,89);
+
+
 
   me.drawMe();
   me.moveMe();
@@ -132,3 +139,18 @@ class Arrow {
   	}
 
 }
+
+  class Wave {
+
+    constructor(x,y,speed){
+      this.x = x;
+      this.y = y;
+      this.speed = speed;
+    }
+    drawWave(){
+      animation(wave, this.x, this.y);
+    }
+    moveWave(){
+      this.x = this.x+ this.speed;
+    }
+  }
