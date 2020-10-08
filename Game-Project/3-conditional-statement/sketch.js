@@ -12,11 +12,13 @@ function preload() {
   soundFormats('mp3', 'ogg', 'wav');
   mySound = loadSound('boom.wav')
   fisherman = loadAnimation('fishermanSprite/FishermanWalk1.png', 'fishermanSprite/FishermanWalk4.png');
+  wave = loadAnimation('waveSprite/Wave1.png','waveSprite/Wave2.png');
 }
 
 function setup() {
   createCanvas(500, 400);
 
+  animation(wave, 300, 100);
   //make one avatar called me
   me = new Avatar(width/2, 300, 3);
 
@@ -69,12 +71,12 @@ class Avatar {
 
 	moveMe(){
     if (keyIsDown(UP_ARROW)) {
-       this.y -= this.speed;
+        this.y -= this.speed;
     }
 
-    /*if (keyIsDown(DOWN_ARROW)) {
+    if (keyIsDown(DOWN_ARROW)) {
         this.y += this.speed;
-    }*/
+    }
     if (keyIsDown(LEFT_ARROW)) {
         this.x -= this.speed;
     }
