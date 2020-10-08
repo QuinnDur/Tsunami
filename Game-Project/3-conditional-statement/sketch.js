@@ -4,6 +4,8 @@ let arrows = [];
 //create a variable to hold your avatar
 let me;
 
+let wave1;
+
 let mySound
 
 var fisherman;
@@ -22,7 +24,7 @@ function setup() {
   //make one avatar called me
   me = new Avatar(width/2, 300, 3);
 
-  wave1 = new Wave(300, 250, -2);
+  wave1 = new Wave(300, 250, 2);
 }
 
 function draw(){
@@ -33,7 +35,8 @@ function draw(){
   rect(0,311,500,89);
 
 
-
+  wave1.drawWave();
+  wave1.moveWave();
   me.drawMe();
   me.moveMe();
 
@@ -151,6 +154,6 @@ class Arrow {
       animation(wave, this.x, this.y);
     }
     moveWave(){
-      this.x = this.x+ this.speed;
+      this.x = this.x- this.speed;
     }
   }
