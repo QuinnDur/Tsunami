@@ -125,7 +125,7 @@ class Arrow {
             fill("red")
             ellipse(this.x, this.y, 30,30)
             mySound.setVolume(0.1);
-            mySound.play();
+            //mySound.play();
     		}
   	}
 
