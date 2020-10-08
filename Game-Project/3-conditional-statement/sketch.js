@@ -9,6 +9,7 @@ function preload() {
   soundFormats('mp3', 'ogg', 'wav');
   mySound = loadSound('impact.wav')
   boat= loadAnimation('boat/Boat0001.png','boat/Boat0004.png')
+  img=loadImage(BackImage.jpeg)
 }
 
 function setup() {
@@ -20,7 +21,7 @@ function setup() {
 }
 
 function draw(){
-	background(BackgroundImage.jpg);
+	background(img,0,0);
 
   me.drawMe();
   me.moveMe();
@@ -64,8 +65,7 @@ class Avatar {
 
 	moveMe(){
     if (keyIsDown(32)) {
-       this.y -= this.speed;
-       //y velocity, y position, y acceleration
+      me.vel.y=-3
        //When spacebar is pressed, character moves upward at speed of 50 frames per second, increasing by 10 each time. Once they hit a height of 150, they drop by 55 units per second until they hit the ground
     }
 
@@ -75,10 +75,35 @@ class Avatar {
     if (keyIsDown(RIGHT_ARROW)) {
         this.x += this.speed;
     }
-	}
+    if (this.x < 0){
+    this.x = width/2
+    }
+    if (this.x > width){
+    this.x = width/2
+    }
+    if (this.y < 0){
+    this.y = height/2
+    }
+    if (this.y > height){
+    this.y = height/2
+    }
+  }
+
 
   die(){
-
+    textSize(30);
+       fill("black");
+       stroke("black");
+       if (hits.length >= 3) {
+         text("Game Over", 100, 100);
+         exit();
+       } else if (hits.length == 2) {
+         text("Lives: 1", 500, 50);
+       } else if (hits.length == 1) {
+         text("Lives: 2", 500, 50);
+       } else if (hits.length == 0) {
+         text("Lives: 3", 500, 50);
+       }
   }
 
 }
