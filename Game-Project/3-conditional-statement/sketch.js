@@ -9,6 +9,7 @@ function preload() {
   soundFormats('mp3', 'ogg', 'wav');
   mySound = loadSound('impact.wav')
   boat= loadAnimation('boat/Boat0001.png','boat/Boat0004.png')
+  img=loadImage(BackImage.jpeg)
 }
 
 function setup() {
@@ -20,7 +21,7 @@ function setup() {
 }
 
 function draw(){
-	background(BackgroundImage.jpg);
+	background(img,0,0);
 
   me.drawMe();
   me.moveMe();
