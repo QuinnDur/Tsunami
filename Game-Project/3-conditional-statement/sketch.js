@@ -1,10 +1,12 @@
 //create an empty array called balls
-let arrows = [];
+let waves = [];
 
 //create a variable to hold your avatar
 let me;
 
 let wave1;
+
+let hits = 0;
 
 let mySound
 
@@ -14,7 +16,7 @@ function preload() {
   soundFormats('mp3', 'ogg', 'wav');
   mySound = loadSound('boom.wav')
   fisherman = loadAnimation('fishermanSprite/FishermanWalk1.png', 'fishermanSprite/FishermanWalk4.png');
-  wave = loadAnimation('waveSprite/Wave1.png','waveSprite/Wave2.png');
+  wave = loadAnimation('waveSprite/Wave1.png','waveSprite/Wave1.png');
 }
 
 function setup() {
@@ -24,7 +26,7 @@ function setup() {
   //make one avatar called me
   me = new Avatar(width/2, 300, 3);
 
-  wave1 = new Wave(300, 250, 2);
+  wave1 = new Wave(680, 250, 2);
 }
 
 function draw(){
@@ -37,22 +39,24 @@ function draw(){
 
   wave1.drawWave();
   wave1.moveWave();
-  me.drawMe();
-  me.moveMe();
+  wave1.hitWave();
 
-  if (frameCount % 10 == 0) {
-      let  b = new Arrow(width, random(0,height), -3);
-      arrows.push(b);
-      console.log(arrows); //print the balls array to the console
+  if (frameCount % 300 == 0) {
+      let  b = new Wave(680, 250, 2);
+      waves.push(b);
+      console.log(waves); //print the balls array to the console
     }
 
 //	draw all the balls in that array
-	for (let i = 0; i < arrows.length; i++) {
-	 	      arrows[i].drawArrow();
-       	  arrows[i].moveArrow();
-        	arrows[i].bounceArrow();
+	for (let i = 0; i < waves.length; i++) {
+	 	      waves[i].drawWave();
+       	  waves[i].moveWave();
+          waves[i].hitWave();
 	  }
+  me.drawMe();
+  me.moveMe();
 
+  me.die();
 }
 
 //avatar class
@@ -96,7 +100,19 @@ class Avatar {
 	}
 
   die(){
-
+    textSize(30);
+    fill("black");
+    stroke("black");
+    if (hits >= 3) {
+      text("Game Over", 180, 100);
+      //exit();
+    } else if (hits == 2) {
+      text("Lives: 1", 180, 100);
+    } else if (hits == 1) {
+      text("Lives: 2", 180, 100);
+    } else if (hits == 0) {
+      text("Lives: 3", 180, 100);
+    }
   }
 
 }
@@ -155,5 +171,14 @@ class Arrow {
     }
     moveWave(){
       this.x = this.x- this.speed;
+    }
+    hitWave(){
+      	if (this.x >= me.x-50 && this.x <= me.x+50 && this.y > me.y-100 && this.y < me.y+100){
+          //me.x = width/2
+          //me.y = 300
+          if (frameCount % 50 == 0) {
+            hits = hits + 1
+          }
+        }
     }
   }
