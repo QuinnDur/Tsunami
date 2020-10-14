@@ -12,6 +12,10 @@ let img;
 
 let wave1;
 
+let jumping = false;
+
+let ySpeed = 3;
+
 function preload() {
   soundFormats('mp3', 'ogg', 'wav');
   mySound = loadSound('impact.wav')
@@ -30,7 +34,7 @@ function setup() {
   //make one avatar called me
   me = new Avatar(width/2, 300, 3);
 
-  wave1 = new Wave(980, 250, 2);
+  wave1 = new Wave(1000, 250, 2);
   boat1 = new Boat(1000, 300, -2);
 }
 
@@ -48,7 +52,7 @@ function draw(){
 
 
   if (frameCount % 300 == 0) {
-      let  b = new Wave(980, 250, 2);
+      let  b = new Wave(1000, 250, 2);
       waves.push(b);
       console.log(waves); //print the balls array to the console
     }
@@ -58,13 +62,12 @@ function draw(){
    waves[i].drawWave();
    waves[i].moveWave();
    waves[i].hitWave();
-
+}
    boat1.drawBoat();
    boat1.moveBoat();
    boat1.hitBoat();
 
-}
-  if (frameCount % 1000 == 0) {
+  if (frameCount % 1200 == 0) {
       let  b = new Boat(1000, 300, -2);
       boats.push(b);
       console.log(boats); //print the balls array to the console
@@ -107,10 +110,23 @@ drawMe(){  // draw the running person
 
         moveMe(){
     if (keyIsDown(32)) {
+      jumping = true;
       //me.speed.y=-3
-//must code fuction up and coming down
-       //When spacebar is pressed, character moves upward at speed of 50 frames per second, increasing by 10 each time. Once they hit a height of 150, they drop by 55 units per second until they hit the ground
     }
+    if (jumping == true){
+      let maxHeight = 50;
+      this.y = this.y - ySpeed;
+      if (this.y <= maxHeight){
+        ySpeed = -1 * ySpeed;
+      }
+      if (this.y >= 300){
+        jumping = false;
+        ySpeed = -1 * ySpeed;
+      }
+    }
+//must code fuction up and coming down
+//When spacebar is pressed, character moves upward at speed of 50 frames per second, increasing by 10 each time. Once they hit a height of 150, they drop by 55 units per second until they hit the ground
+
 
     if (keyIsDown(LEFT_ARROW)) {
         this.x -= this.speed;
@@ -205,18 +221,21 @@ class Boat{
         bounceBoat(){
             //if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-40 && this.y < me.y+40){
             //this.speed = -this.speed;
-            //fill("red")
-            //ellipse(this.x, this.y, 30,30)
+            fill("red")
+            ellipse(this.x, this.y, 30,30)
           //  mySound.setVolume(0.1);
           //  mySound.play();
                 }
         hitBoat(){
           if (this.x >= me.x-150 && this.x <= me.x+150 && this.y > me.y-100 && this.y < me.y+100){
+            fill("red")
+            ellipse(this.x, this.y, 30,30)
               //me.x = width/2
               //me.y = 300
-              if (frameCount % 200 == 0) {
+              if (frameCount % 300 == 0) {
                 hits++
               }
         }
+
   }
 }
